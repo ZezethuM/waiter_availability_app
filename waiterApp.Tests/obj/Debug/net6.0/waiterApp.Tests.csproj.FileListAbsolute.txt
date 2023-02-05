@@ -87,8 +87,6 @@
 /home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/bin/Debug/net6.0/zh-Hant/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 /home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/bin/Debug/net6.0/zh-Hant/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 /home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/bin/Debug/net6.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
-/home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/bin/Debug/net6.0/waiterApp.Function.dll
-/home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/bin/Debug/net6.0/waiterApp.Function.pdb
 /home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/obj/Debug/net6.0/waiterApp.Tests.csproj.AssemblyReference.cache
 /home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/obj/Debug/net6.0/waiterApp.Tests.GeneratedMSBuildEditorConfig.editorconfig
 /home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/obj/Debug/net6.0/waiterApp.Tests.AssemblyInfoInputs.cache
@@ -99,3 +97,12 @@
 /home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/obj/Debug/net6.0/ref/waiterApp.Tests.dll
 /home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/obj/Debug/net6.0/waiterApp.Tests.pdb
 /home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/obj/Debug/net6.0/waiterApp.Tests.genruntimeconfig.cache
+/home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/bin/Debug/net6.0/waiterAppFunction.deps.json
+/home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/bin/Debug/net6.0/waiterAppFunction.runtimeconfig.json
+/home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/bin/Debug/net6.0/waiterAppFunction
+/home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/bin/Debug/net6.0/Dapper.dll
+/home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/bin/Debug/net6.0/Microsoft.Extensions.Logging.Abstractions.dll
+/home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/bin/Debug/net6.0/Npgsql.dll
+/home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/bin/Debug/net6.0/waiterAppFunction.dll
+/home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/bin/Debug/net6.0/waiterAppFunction.pdb
+/home/codex/My files/c-sharp_projects/waiter_availability_app/waiterApp.Tests/bin/Debug/net6.0/sql/data.sql

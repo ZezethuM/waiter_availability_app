@@ -1,7 +1,9 @@
+using waiterApp;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddSingleton<IWaiterShift, Shift>(x => new Shift(builder.Configuration.GetConnectionString("client")));
 
 var app = builder.Build();
 

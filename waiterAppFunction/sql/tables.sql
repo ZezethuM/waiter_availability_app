@@ -13,11 +13,6 @@
     );
 
     CREATE TABLE SCHEDULE(
-        WaiterId int NOT NULL,
-        DayId int NOT NULL
-    );
-
-    CREATE TABLE SCHEDULE(
         Waiters_Id int NOT NULL,
         Day_Id int NOT NULL,
         foreign key (Waiters_Id) references Waiters(id),

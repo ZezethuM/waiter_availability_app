@@ -24,3 +24,11 @@
 /home/codex/My files/c-sharp_projects/waiter_availability_app/waitersRazorPages/obj/Debug/net6.0/ref/waitersRazorPages.dll
 /home/codex/My files/c-sharp_projects/waiter_availability_app/waitersRazorPages/obj/Debug/net6.0/waitersRazorPages.pdb
 /home/codex/My files/c-sharp_projects/waiter_availability_app/waitersRazorPages/obj/Debug/net6.0/waitersRazorPages.genruntimeconfig.cache
+/home/codex/My files/c-sharp_projects/waiter_availability_app/waitersRazorPages/bin/Debug/net6.0/waiterAppFunction.deps.json
+/home/codex/My files/c-sharp_projects/waiter_availability_app/waitersRazorPages/bin/Debug/net6.0/waiterAppFunction.runtimeconfig.json
+/home/codex/My files/c-sharp_projects/waiter_availability_app/waitersRazorPages/bin/Debug/net6.0/waiterAppFunction
+/home/codex/My files/c-sharp_projects/waiter_availability_app/waitersRazorPages/bin/Debug/net6.0/Dapper.dll
+/home/codex/My files/c-sharp_projects/waiter_availability_app/waitersRazorPages/bin/Debug/net6.0/Npgsql.dll
+/home/codex/My files/c-sharp_projects/waiter_availability_app/waitersRazorPages/bin/Debug/net6.0/waiterAppFunction.dll
+/home/codex/My files/c-sharp_projects/waiter_availability_app/waitersRazorPages/bin/Debug/net6.0/waiterAppFunction.pdb
+/home/codex/My files/c-sharp_projects/waiter_availability_app/waitersRazorPages/obj/Debug/net6.0/waitersRazorPages.csproj.CopyComplete

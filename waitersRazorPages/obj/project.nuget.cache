@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "mOURyNoeLjx5Loyp/sEz4ei4SLfLbZ4OCnRRzJdUhYrVKR0UKx2VdCpiox4T8TGFGHmGEnDrygU8jECty9CQ8w==",
+  "dgSpecHash": "c+sL55fdlHD0647YheUzeLJYgbrxSyOj8c17/h32rs4mkBU+cbRjIXCtLhIjUcqowF/tt6VLhMPC8q75xa9wyQ==",
   "success": true,
   "projectFilePath": "/home/codex/My files/c-sharp_projects/waiter_availability_app/waitersRazorPages/waitersRazorPages.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/home/codex/.nuget/packages/dapper/2.0.123/dapper.2.0.123.nupkg.sha512",
+    "/home/codex/.nuget/packages/microsoft.extensions.logging.abstractions/6.0.0/microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "/home/codex/.nuget/packages/npgsql/7.0.1/npgsql.7.0.1.nupkg.sha512",
+    "/home/codex/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
