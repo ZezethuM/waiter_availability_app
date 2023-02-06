@@ -47,12 +47,11 @@ public class IndexModel : PageModel
                     ModelState.Clear();        
                  }
             }
-        
         }
     }
-
     public void OnPostReset()
     {
         _waiterShits.UpdatingShifts(shifts.FirstName!, CheckedDays);
+        TempData["Message"] = "Days have been successfully updated/Added";
     }
 }

@@ -51,8 +51,14 @@ public class Shift : IWaiterShift
         {  
             weekdaysid = dayid;
         }
+        // var param4 = new {day1 = weekdaysid};
+        // var sqlDays1 = @"select count(*) from schedule where waiters_id = @day1";
+        // var resultingDays1 = connection.QuerySingle(sqlDays1, param4);
+        // if(resultingDays1.count < 3)
+        // {
         var parameter3 = new {Waiter_Id = waiter_id, Weekdaysid = weekdaysid};
         connection.Execute(@"insert into schedule values (@Waiter_Id, @Weekdaysid)", parameter3); 
+        // }
         }
     }
     public Dictionary<string, List<string>> DisplayDays()
@@ -202,7 +208,7 @@ public class Shift : IWaiterShift
                 var parameter6 = new {Waiter_Id2 = waiter_id2, Weekdaysid3 = weekdaysid1};
                 connection.Execute(@"insert into schedule values (@Waiter_Id2, @Weekdaysid3)", parameter6); 
             }
-            
+    
         }
         else{
             foreach (var shifday in DayIds)

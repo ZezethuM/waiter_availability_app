@@ -31,6 +31,7 @@ namespace waitersRazorPages.Pages
         public void OnPostDelete()
         {
             _shiftDays.ManagerResetData();
+            TempData["AlertMessage"] = "Data has been cleared";
         }
         
     }
