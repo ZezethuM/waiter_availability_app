@@ -18,6 +18,8 @@ body {
   margin-bottom: 60px;
   background-color: #ffffff;
   font-family: 'Merienda', cursive;
+  background-image: url("../images/istockphoto-1152767411-170667a.jpg");
+  background-repeat:space;
 }
 .widget 
 {
@@ -85,7 +87,8 @@ h1{
   font-weight: bold;
 }
 
-#critical {
+#empty 
+{
   color: crimson;
   font-weight: bold;
 }

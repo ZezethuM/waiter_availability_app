@@ -43,7 +43,7 @@
             @if(item.Value.Count() == 0)
             {
                 <td>
-                    <i class="fa fa-battery-empty" id="good" aria-hidden="true"><h6>Empty</h6></i>
+                    <i class="fa fa-battery-empty" id="empty" aria-hidden="true"><h6>Empty</h6></i>
                 </td>
             }
             else if(item.Value.Count() < 3)
@@ -55,7 +55,7 @@
             else if(item.Value.Count() >= 3)
             {
                 <td>
-                    <i class="fa fa-battery-full" id="critical" aria-hidden="true"><h6>Full</h6></i>
+                    <i class="fa fa-battery-full" id="good" aria-hidden="true"><h6>Full</h6></i>
                 </td>
             }
             
