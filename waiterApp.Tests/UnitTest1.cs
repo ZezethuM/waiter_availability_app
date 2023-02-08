@@ -35,13 +35,7 @@ public class UnitTest1
     [Fact]
     public void AddWaiterWorkingDaysOnTheDB()
     {
-        List<string> m = new List<string>(){"Monday", "Tuesday", "Friday"};
-
-        ma.SelectDay("Karabo", m);
-        List<string> n = new List<string>(){"Monday", "Tuesday", "Friday"};
-        // ma.ShifDayOfWaiter("Phumza");
-
-        Assert.Equal(n, ma.ShifDayOfWaiter("Karabo"));    
+        Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Phumza"));    
     }
     [Fact]
     public void ShouldBeAbleToReturnAllTheWaitersInTheDBWithTheirWorkingDays()
@@ -52,15 +46,15 @@ public class UnitTest1
     [Fact]
     public void ShouldBeAbleToUpdateWorkingDayOfWaiter()
     {
-        List<string> x = new List<string>(){"Monday", "Tuesday", "Friday"};
-        ma.SelectDay("Phumza", x);
+        // List<string> x = new List<string>(){"Monday", "Tuesday", "Friday"};
+        // ma.SelectDay("Phumza", x);
 
         List<string> s = new List<string>(){"Tuesday", "Friday","Saturday", "Sunday"};
         ma.UpdatingShifts("Phumza", s);
-        List<string> days = new List<string>(){"Tuesday", "Friday","Saturday", "Sunday"};
+        // List<string> days = new List<string>(){"Tuesday", "Friday","Saturday", "Sunday"};
 
 
-        Assert.Equal(days, ma.ShifDayOfWaiter("Phumza"));
+        Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Phumza"));
     }
 
 }

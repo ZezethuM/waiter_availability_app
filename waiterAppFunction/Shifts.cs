@@ -21,16 +21,14 @@ public class Shift : IWaiterShift
         var sql = "SELECT count(*) FROM waiters where firstname = @FirstName;";
 
         var result = connection.QuerySingle<int>(sql, parameter);
-
+       
         if(result == 0)
         {
             throw new Exception($"Invalid username {firstname}");
-        //     foreach (var item in listOfWaiters)
-        //     {
-        //     }
         }
         var listOfWaiters =  connection.QueryFirst<Waiter>(@"Select * from waiters where firstname = @FirstName;", parameter);
          var waiter_id = listOfWaiters.Id;
+         Console.WriteLine(waiter_id);
 
         foreach (var day in days)
         {
