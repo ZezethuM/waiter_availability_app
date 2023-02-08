@@ -29,11 +29,6 @@ jobs:
             --health-interval 10s
             --health-timeout 5s
             --health-retries 5
-            
-            - name: create postgresql tables
-      run:- name: create postgresql tables
-      run:  PGPASSWORD=waiters123 psql -h localhost -U waiters -d waiters_app -a -f ./waiterAppFunction/sql/tables.sql
-      
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -44,6 +39,8 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
+    - name: create postgresql tables
+      run:  PGPASSWORD=waiters123 psql -h localhost -U waiters -d waiters_app -a -f ./waiterAppFunction/sql/tables.sql
     - name: Test
       run: dotnet test --no-build --verbosity normal
       env:
