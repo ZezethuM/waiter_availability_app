@@ -32,8 +32,6 @@ jobs:
             
             - name: create postgresql tables
       run: PGPASSWORD=ADBsJezup7e_jmpWR07rzHYUCp5qAwFV psql -h localhost -U dvskbyna -d dvskbyna -a -f ./waiterAppFunction/sql/tables.sql
-            
-36
 
     steps:
     - uses: actions/checkout@v3
