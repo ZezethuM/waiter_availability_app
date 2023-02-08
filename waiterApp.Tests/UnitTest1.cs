@@ -21,15 +21,6 @@ public class UnitTest1
         }
         return theCN;
     }
-
-
-    // public UnitTest1(){
-
-    //     using(var connection = new NpgsqlConnection(GetConnectionString())){
-    //         connection.Execute("delete from greet_count");
-    //     }
-
-    // }
    IWaiterShift ma = new Shift(GetConnectionString());
     // Shift n = new Shift(connectionString);
     public UnitTest1()
@@ -47,9 +38,10 @@ public class UnitTest1
         List<string> m = new List<string>(){"Monday", "Tuesday", "Friday"};
 
         ma.SelectDay("Karabo", m);
+        List<string> n = new List<string>(){"Monday", "Tuesday", "Friday"};
         // ma.ShifDayOfWaiter("Phumza");
 
-        Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Karabo"));    
+        Assert.Equal(n, ma.ShifDayOfWaiter("Karabo"));    
     }
     [Fact]
     public void ShouldBeAbleToReturnAllTheWaitersInTheDBWithTheirWorkingDays()
@@ -58,20 +50,17 @@ public class UnitTest1
     }
 
     [Fact]
-    public void ShoildBeAbleToUpdateWorkingDayOfWaiter()
+    public void ShouldBeAbleToUpdateWorkingDayOfWaiter()
     {
         List<string> x = new List<string>(){"Monday", "Tuesday", "Friday"};
         ma.SelectDay("Phumza", x);
 
         List<string> s = new List<string>(){"Tuesday", "Friday","Saturday", "Sunday"};
         ma.UpdatingShifts("Phumza", s);
+        List<string> days = new List<string>(){"Tuesday", "Friday","Saturday", "Sunday"};
 
-        Assert.Equal(ma.GetDictionary(), ma.DisplayDays());
-    }
-    [Fact]
-    public void ShouldAllowManagerToResetTheData()
-    {
 
+        Assert.Equal(days, ma.ShifDayOfWaiter("Phumza"));
     }
 
 }
