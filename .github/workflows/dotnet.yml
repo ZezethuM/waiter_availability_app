@@ -31,8 +31,8 @@ jobs:
             --health-retries 5
             
             - name: create postgresql tables
-      run: PGPASSWORD=ADBsJezup7e_jmpWR07rzHYUCp5qAwFV psql -h localhost -U dvskbyna -d dvskbyna -a -f ./waiterAppFunction/sql/tables.sql
-
+      run: ./waiterAppFunction/sql/tables.sql
+      
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
