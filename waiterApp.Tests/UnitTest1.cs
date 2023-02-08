@@ -46,10 +46,10 @@ public class UnitTest1
     {
         List<string> m = new List<string>(){"Monday", "Tuesday", "Friday"};
 
-        ma.SelectDay("Phumza", m);
-        ma.ShifDayOfWaiter("Phumza");
+        ma.SelectDay("Karabo", m);
+        // ma.ShifDayOfWaiter("Phumza");
 
-        Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Phumza"));    
+        Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Karabo"));    
     }
     [Fact]
     public void ShouldBeAbleToReturnAllTheWaitersInTheDBWithTheirWorkingDays()
