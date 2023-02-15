@@ -1,4 +1,5 @@
 # Waiter_availability_app
+[![.NET](https://github.com/ZezethuM/waiter_availability_app/actions/workflows/dotnet.yml/badge.svg)](https://github.com/ZezethuM/waiter_availability_app/actions/workflows/dotnet.yml)
 
 #Waiters Page
 ![Screenshot from 2023-02-07 15-18-57](https://user-images.githubusercontent.com/95750574/217255887-88e963f1-b925-42d0-867f-012784839014.png)
