@@ -5,6 +5,22 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<IWaiterShift, Shift>(x => new Shift(builder.Configuration.GetConnectionString("client")));
 
+builder.Services.AddDistributedMemoryCache();
+
+// builder.Services.AddSession(options =>
+// {
+//     options.Cookie.Name = ".AdventureWorks.Session";
+//     options.IdleTimeout = TimeSpan.FromSeconds(60);
+//     options.Cookie.IsEssential = true;
+// });
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(60);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -20,7 +36,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapRazorPages();
 

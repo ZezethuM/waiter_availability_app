@@ -22,7 +22,6 @@ public class UnitTest1
         return theCN;
     }
    IWaiterShift ma = new Shift(GetConnectionString());
-    // Shift n = new Shift(connectionString);
     public UnitTest1()
     {
         var sql = File.ReadAllText("./sql/data.sql");
@@ -46,15 +45,21 @@ public class UnitTest1
     [Fact]
     public void ShouldBeAbleToUpdateWorkingDayOfWaiter()
     {
-        // List<string> x = new List<string>(){"Monday", "Tuesday", "Friday"};
-        // ma.SelectDay("Phumza", x);
 
         List<string> s = new List<string>(){"Tuesday", "Friday","Saturday", "Sunday"};
         ma.UpdatingShifts("Phumza", s);
-        // List<string> days = new List<string>(){"Tuesday", "Friday","Saturday", "Sunday"};
-
 
         Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Phumza"));
     }
+
+    //  [Fact]
+    // public void ShouldBeAbleToReturnAllWaitersInDB()
+    // {
+
+    //     List<string> s = new List<string>(){"Tuesday", "Friday","Saturday", "Sunday"};
+    //     ma.UpdatingShifts("Phumza", s);
+
+    //     Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Phumza"));
+    // }
 
 }

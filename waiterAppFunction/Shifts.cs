@@ -136,6 +136,7 @@ public class Shift : IWaiterShift
     public List<string> shiftDays = new List<string>();
     public List<string> ShifDayOfWaiter(string firstname)
     {
+        shiftDays.Clear();
         var sql3 = @"select firstname, day from waiters
         inner join schedule on waiters.id = schedule.waiters_id
         inner join weekdays on schedule.day_id = weekdays.id";
@@ -216,6 +217,23 @@ public class Shift : IWaiterShift
                 connection.Execute(@"insert into schedule values (@Waiter_Id1, @Weekdaysid1)", param2);
             }
         }
+    }
+    public string CheckEmployees(string firstname)
+    {
+        var param3 = new {Name = firstname};
+        var sqlquery = "SELECT count(*) FROM waiters where firstname = @Name;";
+
+        var results = connection.QueryFirst(sqlquery, param3);
+
+        if(results.count == 1)
+        {
+            return firstname;
+        }
+        else
+        {
+            return "Invalid user please enter a correct firstname";
+        }
+
     }
     public void ManagerResetData()
     {

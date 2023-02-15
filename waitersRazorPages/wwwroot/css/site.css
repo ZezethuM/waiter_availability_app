@@ -6,6 +6,16 @@ html {
 @media (min-width: 768px) {
   html {
     font-size: 16px;
+    flex-direction: column;
+  }
+  .widget
+  {
+    font-size: 16px;
+    flex-direction: column;
+  }
+  .mytable
+  {
+    width: fit-content;
   }
 }
 
@@ -13,7 +23,21 @@ html {
   position: relative;
   min-height: 100%;
 }
+.blink {
+  animation: blink 1s steps(1, end) infinite;
+}
 
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 body {
   margin-bottom: 60px;
   background-color: #ffffff;
@@ -35,38 +59,108 @@ body {
 .mb
 {
   text-align: center;
+  align-items: center;
   padding-bottom: 20px;
 }
 .widget table
 {
   margin-top: 0;
-  /* width: 600px; */
   border:none;
   color: #e50191;
   font-weight: bolder;
 }
-table {
+.checkbox
+{
+  width: 20px;
+  height: 20px;
+}
+.mytable {
   margin: auto;
-  padding-top: 20px;
   width: 100% !important; 
   font-size: 17px;
   font-weight:lighter;
-  
+}
+
+a
+{
+  text-decoration: none;
+  color: #ffffff;
+}
+a:hover 
+{
+  color: #e50191;
+}
+.myform
+{
+  margin: auto;
+  color: #e50191;
+  margin-top: 250px;
+}
+.inp
+{
+  margin-bottom: 15px;
+  margin-left: -5px;
+  width: auto;
+  font-size: large;
+  height: 40px;
+}
+label
+{
+  font-size: larger;
+  padding-right: 7px;
+}
+.btn
+{
+  border: none;
+  background-color: #ffffff;
+  color: #e50191;
+  font-weight: bolder;
+}
+.user
+{
+  color: #e50191;
+  font-size: 20px;
+  background-color: #ffffff;
+  width: 1000px;
+  margin: auto;
+  z-index: 9999;
+}
+
+.btn:hover
+{
+  color: #e50191;
+}
+.temporal
+{
+  text-align: center;
+  font-size: larger;
+  color: #ffffff;
+  background-color: #e50191;
+  position:absolute;
+  margin-top: 300px;
+  width: 230px;
+}
+.ls
+{
+  margin-left: 90px;
 }
 h6
 {
   font-family: 'Merienda', cursive;
  }
-li
+.mytable li
 {
   list-style: none;
+
 }
+
 h1{
   color: #e50191;
 }
 .submitbtn
 {
   background-color: #e50191;
+  border-radius: 10px;
   color: #ffffff;
   border: none;
   width: 100px;
@@ -91,4 +185,145 @@ h1{
 {
   color: crimson;
   font-weight: bold;
+}
+
+/* CSS */
+.button-73 {
+  appearance: none;
+  background-color: #e50191;
+  border-radius: 40em;
+  border-style: none;
+  width: 150px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Merienda', cursive;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -.24px;
+  margin: 0;
+  outline: none;
+  padding: 1rem 1.3rem;
+  quotes: auto;
+  text-align: center;
+  text-decoration: none;
+  transition: all .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-73:hover {
+  background-color: #ffffff;
+  box-shadow:  0 -6px 8px inset;
+  color: #e50191;
+  transform: scale(1.125);
+}
+
+.button-73:active {
+  transform: scale(1.025);
+}
+
+@media (min-width: 768px) {
+  .button-73 {
+    font-size: 1.5rem;
+    padding: .75rem 2rem;
+  }
+}
+/* input box */
+input,
+span,
+label{
+  font-family: 'Merienda', cursive;
+  display: block;
+  margin: 15px;
+  padding: 10px;
+  border: none;
+  font-size: 10px;
+}
+
+input:focus {
+  outline: 0;
+}
+/* Question */
+
+input.question
+{
+  font-size: 20px;
+  font-weight: 150;
+  border-radius: 2px;
+  margin-left: 450px;
+  border: none;
+  width: 20%;
+  background: rgba(0, 0, 0, 0);
+  transition: padding-top 0.2s ease, margin-top 0.2s ease;
+  overflow-x: hidden; /* Hack to make "rows" attribute apply in Firefox. */
+}
+/* Underline and Placeholder */
+
+input.question + label{
+  display: block;
+  position: relative;
+  white-space: nowrap;
+  padding-bottom: 10px;
+  margin-left: 450px;
+  width: 30%;
+  border-top: 1px solid red;
+  -webkit-transition: width 0.4s ease;
+  transition: width 0.4s ease;
+  height: 0px;
+}
+
+input.question:focus + label
+{
+  width: 30%;
+}
+
+input.question:focus,
+input.question:valid {
+  padding-top: 50px;
+  color: #e50191;
+  text-decoration: none;
+}
+
+input.question:focus + label > span,
+input.question:valid + label > span {
+  top: -90px;
+  font-size: 15px;
+  color: #e50191;
+}
+
+input.question:valid + label,
+textarea.question:valid + label {
+  border-color: green;
+}
+
+input.question:invalid {
+  box-shadow: none;
+}
+
+input.question + label > span{
+  font-weight: 300;
+  margin: 0;
+  position: absolute;
+  color: #e50191;
+  font-size: 28px;
+  top: -50px;
+  left: 0px;
+  z-index: -1;
+  -webkit-transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+  transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+}
+
+@-webkit-keyframes appear {
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes appear {
+  100% {
+    opacity: 1;
+  }
 }

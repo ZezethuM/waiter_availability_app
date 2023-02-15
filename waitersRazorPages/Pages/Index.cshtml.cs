@@ -6,52 +6,54 @@ namespace waitersRazorPages.Pages;
 
 public class IndexModel : PageModel
 {
-    private IWaiterShift _waiterShits;
-    private readonly ILogger<IndexModel> _logger;
+    private IWaiterShift _waiterShift;
+
+     private readonly ILogger<IndexModel> _logger;
 
     public IndexModel(ILogger<IndexModel> logger, IWaiterShift waiterShift)
     {
         _logger = logger;
-        _waiterShits = waiterShift;
+        _waiterShift = waiterShift;
     }
+    
+    public string Firstname;
 
     [BindProperty]
-    public List<String> CheckedDays {get; set;}
+    public string UserName {get; set;}
 
-    public Dictionary<string, List<string>> DaysOfWeek { get { return _waiterShits.DisplayDays();}}
-
-
-
-    [BindProperty (SupportsGet =true)]
-    public Shifts shifts {get; set;}
-
-    [BindProperty]
-    public string? Handler{get; set;}
+    public string Msg;
 
     public void OnGet()
     {
-        _waiterShits.ShifDayOfWaiter(shifts.FirstName!);
 
-        _waiterShits.DisplayDays();
-       
     }
-    public void OnPostShift()
+    public IActionResult OnGetLogout()
     {
-        if(Handler == "Shift")
+        HttpContext.Session.Remove("username");
+        HttpContext.Session.Remove("name");
+        return Page();
+    }
+
+    public IActionResult OnPost()
+    {
+        Firstname = _waiterShift.CheckEmployees(UserName);
+        // Console.WriteLine(Firstname);
+        if(UserName.Equals(Firstname))
         {
-            if(shifts.FirstName != null && CheckedDays.Count != 0)
-            {
-                 if(ModelState.IsValid)
-                 {
-                    _waiterShits.SelectDay(shifts.FirstName!, CheckedDays);
-                    ModelState.Clear();        
-                 }
-            }
+            HttpContext.Session.SetString("username", UserName);
+            return RedirectToPage("ScheduleShift");
+        }
+        else if(UserName.Equals("Admin"))
+        {
+            HttpContext.Session.SetString("username", "Admin");
+            return RedirectToPage("ManagerView");
+        }
+        else
+        {
+        TempData["UserMessage"] = _waiterShift.CheckEmployees(Firstname);
+            Msg = _waiterShift.CheckEmployees(Firstname);
+            return Page();
         }
     }
-    public void OnPostReset()
-    {
-        _waiterShits.UpdatingShifts(shifts.FirstName!, CheckedDays);
-        TempData["Message"] = "Days have been successfully updated/Added";
-    }
+
 }

@@ -31,8 +31,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/codex/My files/c-sharp_projects/waiter_availability_app/waitersRazorPages/Pages/ScheduleShift.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2NoZWR1bGVTaGlmdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/codex/My files/c-sharp_projects/waiter_availability_app/waitersRazorPages/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/codex/My files/c-sharp_projects/waiter_availability_app/waitersRazorPages/Pages/UserGuide.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlckd1aWRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/codex/My files/c-sharp_projects/waiter_availability_app/waitersRazorPages/Pages/_ViewImports.cshtml]

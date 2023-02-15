@@ -26,12 +26,35 @@ namespace waitersRazorPages.Pages
             get;
             set;
         }
-        public Dictionary<string, List<string>> DaysOfWeek { get { return _shiftDays.DisplayDays();}}
+        public string Name;
 
+        [BindProperty]
+        public string UserName {get; set;}
+        public Dictionary<string, List<string>> DaysOfWeek { get { return _shiftDays.DisplayDays();}}
+        public IActionResult OnGetUpdate()
+        {
+            HttpContext.Session.GetString("name");
+            HttpContext.Session.Remove("username");
+            return Page();
+        }
+        public void OnGet()
+        {
+            UserName = HttpContext.Session.GetString("username");
+        }
         public void OnPostDelete()
         {
             _shiftDays.ManagerResetData();
             TempData["AlertMessage"] = "Data has been cleared";
+        }
+        public void  OnPostUpdate()
+        {
+            HttpContext.Session.SetString("name", UserName);
+            // return RedirectToPage("ScheduleShift");
+        }
+        public IActionResult OnPostLogIn()
+        {
+            TempData["LoginMessage"] = "Please Login first";
+            return RedirectToPage("Index");
         }
         
     }
