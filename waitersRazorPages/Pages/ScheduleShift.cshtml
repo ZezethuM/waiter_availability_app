@@ -8,7 +8,7 @@
         {
         <p>Hear are you working days @Model.Username</p>
         <hr>
-        <table>
+        <table class="table mytable">
             <tr>
                 <th>
                     Days
@@ -17,7 +17,7 @@
             <td>
             @foreach(var userDays in @Model.userdays)
             {
-            <li>
+            <li class="days">
                 @userDays
             </li>
             }

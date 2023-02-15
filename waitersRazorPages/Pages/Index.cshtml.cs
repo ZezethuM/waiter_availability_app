@@ -37,7 +37,6 @@ public class IndexModel : PageModel
     public IActionResult OnPost()
     {
         Firstname = _waiterShift.CheckEmployees(UserName);
-        // Console.WriteLine(Firstname);
         if(UserName.Equals(Firstname))
         {
             HttpContext.Session.SetString("username", UserName);
@@ -51,8 +50,10 @@ public class IndexModel : PageModel
         else
         {
         TempData["UserMessage"] = _waiterShift.CheckEmployees(Firstname);
-            Msg = _waiterShift.CheckEmployees(Firstname);
-            return Page();
+        Msg = _waiterShift.CheckEmployees(Firstname);
+        UserName = "";
+        ModelState.Clear();
+        return Page();
         }
     }
 

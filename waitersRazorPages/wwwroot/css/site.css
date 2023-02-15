@@ -75,12 +75,12 @@ body {
   height: 20px;
 }
 .mytable {
+  color: #ffffff;
   margin: auto;
   width: 100% !important; 
   font-size: 17px;
   font-weight:lighter;
 }
-
 a
 {
   text-decoration: none;
@@ -94,7 +94,13 @@ a:hover
 {
   margin: auto;
   color: #e50191;
-  margin-top: 250px;
+  padding-top: 220px;
+  height: 100vh;
+}
+.days
+{
+  list-style: none;
+  text-align: center;
 }
 .inp
 {
