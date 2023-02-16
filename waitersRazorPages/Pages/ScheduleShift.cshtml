@@ -6,7 +6,7 @@
     <div class="temporal">
         @if(@Model.Username != null && @Model.userdays.Count() != 0 || @Model.Handler == "Reset")
         {
-        <p>Hear are you working days @Model.Username</p>
+        <p><strong>Hear are your working days @Model.Username</strong></p>
         <hr>
         <table class="table mytable">
             <tr>
@@ -30,8 +30,8 @@
     <div class="widget">
 <form method="post">
 <div class="form-group">
-    <h1 class="display-5">Welcome <b>@Model.Username</b></h1>
-    <h1 class="display-5">Schedule Shift Days</h1>
+    <h1 class="display-5"><strong>Welcome <b>@Model.Username</strong></h1>
+    <h1 class="display-5"><strong>Schedule Shift Days</strong></h1>
 </div>
     <table class="table mytable">
             <tr>
