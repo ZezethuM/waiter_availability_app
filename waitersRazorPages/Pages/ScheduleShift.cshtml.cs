@@ -21,6 +21,9 @@ namespace waitersRazorPages.Pages
 
     public List<string> userdays = new List<string>();
 
+    DateTime n = DateTime.Now;
+    public Dictionary<DayOfWeek, DateOnly> DayDates = new Dictionary<DayOfWeek, DateOnly>();
+
     public Dictionary<string, List<string>> DaysOfWeek { get { return _waiterShits.DisplayDays();}}
 
     [BindProperty (SupportsGet =true)]
@@ -36,6 +39,7 @@ namespace waitersRazorPages.Pages
     {    
         Username = HttpContext.Session.GetString("username")!;
         userdays = _waiterShits.ShifDayOfWaiter(Username);
+        DayDates = _waiterShits.DaysOfTheWeek(n);
         _waiterShits.DisplayDays();
     }
     public void OnGetManagerView()
