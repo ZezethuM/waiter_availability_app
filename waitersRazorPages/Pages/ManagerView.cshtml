@@ -39,7 +39,6 @@
                     }
             }
             </td>      
-           
         </tbody>
         } 
     </table>
@@ -51,10 +50,9 @@
     }
     <div class="form-group row mt-5">
     <div class="col-sm-10">
-        @if(@Model.UserName != null)
+        @if(@Model.UserName == "Admin")
         {
             <button type="submit" asp-page-handler="delete" class="button-73">RESET</button>
-            <button class="button-73"><a asp-page="Index" asp-page-handler="Logout">LOGOUT</a></button>
         }
         @if(@Model.UserName == null)
         {

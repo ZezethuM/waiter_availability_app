@@ -235,9 +235,23 @@ public class Shift : IWaiterShift
         }
 
     }
+
     public void ManagerResetData()
     {
         connection.Execute(@"truncate table schedule");
+    }
+    DateTime currDate = DateTime.Now;
+     public Dictionary<DayOfWeek, DateOnly> DaysOfTheWeek(DateTime currDateAndTime)
+    {
+        Dictionary<DayOfWeek,DateOnly> dates = new Dictionary<DayOfWeek,DateOnly>();
+        currDateAndTime = currDate;
+        var mon = DayOfWeek.Monday - currDateAndTime.DayOfWeek;
+        var day = currDate.AddDays(mon);
+        for(var i = 0; i < 7; i++)
+        {
+            dates.Add(day.AddDays(i).DayOfWeek, DateOnly.FromDateTime(day.AddDays(i))); 
+        }
+        return dates;
     }
 }
 }

@@ -20,6 +20,9 @@ namespace waitersRazorPages.Pages
     public List<String> CheckedDays {get; set;}
 
     public List<string> userdays = new List<string>();
+    DateTime n = DateTime.Now;
+    public Dictionary<DayOfWeek, DateOnly> DayDates = new Dictionary<DayOfWeek, DateOnly>();
+
 
     public Dictionary<string, List<string>> DaysOfWeek { get { return _waiterShits.DisplayDays();}}
 
@@ -35,6 +38,11 @@ namespace waitersRazorPages.Pages
     public void OnGet()
     {    
         Username = HttpContext.Session.GetString("username")!;
+        if(Username == null)
+        {
+            RedirectToPage("Index");
+        }
+        DayDates = _waiterShits.DaysOfTheWeek(n);
         userdays = _waiterShits.ShifDayOfWaiter(Username);
         _waiterShits.DisplayDays();
     }

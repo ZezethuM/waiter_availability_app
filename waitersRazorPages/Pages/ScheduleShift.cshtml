@@ -1,4 +1,5 @@
 ﻿@page
+@using Microsoft.AspNetCore.Http;
 @model waitersRazorPages.Pages.ScheduleShiftModel
 @{
 }
@@ -94,7 +95,6 @@
         @if(@Model.Username != null)
         {
             <button type="update" asp-page-handler="Reset" class="button-73">UPDATE</button>
-            <button class="button-73"><a asp-page="Index" asp-page-handler="Logout">LOGOUT</a></button>
         }
         @if(@Model.Username == null)
         {
@@ -111,3 +111,35 @@
 </div>
 
 
+@* <div class="widget">
+    <table class="table mytable">
+            <tr>
+                <th>SELECT</th>
+                <th>DAY</th>
+                <th>Date</th>
+                <th>STATUS</th>
+
+            </tr>
+            @foreach (var item in @Model.DayDates)
+            {
+            <tr>
+                <td>
+                    <input class="checkbox" name="CheckedDays" type="checkbox" checked value="@item.Key" />
+                </td>
+                <td>
+                    @item.Key
+                </td> 
+                <td>@item.Value</td>    
+            
+           
+                <td>
+                    <input class="checkbox" name="CheckedDays" type="checkbox" value="@item" />
+                </td>
+                <td>
+                    @item
+                </td>     
+            </tr>
+        }
+        </table>
+
+</div> *@
