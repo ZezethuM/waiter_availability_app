@@ -3,7 +3,7 @@
 @{
 }
 <div class="container">
-    <div class="temporal">
+    @* <div class="temporal">
         @if(@Model.Username != null && @Model.userdays.Count() != 0 || @Model.Handler == "Reset")
         {
         <p><strong>Hear are your working days @Model.Username</strong></p>
@@ -25,10 +25,62 @@
         </table>
         }
 
-    </div>
+    </div> *@
 <div class="text-center">
     <div class="widget">
-<form method="post">
+
+<div class="widget">
+    <table class="table mytable">
+            <tr>
+                <th>SELECT</th>
+                <th>DAY</th>
+                <th>Date</th>
+                <th>STATUS</th>
+
+            </tr>
+            @foreach (var item in @Model.DayDates)
+            {
+            <tr>
+                <td>
+                    <input class="checkbox" name="CheckedDays" type="checkbox" checked value="@item.Key" />
+                </td>
+                <td>
+                    @item.Key
+                </td> 
+                <td>@item.Value</td>    
+            
+           
+                <td>
+                    <input class="checkbox" name="CheckedDays" type="checkbox" value="@item" />
+                </td>
+                <td>
+                    @item
+                </td>     
+            </tr>
+        }
+        </table>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* <form method="post">
 <div class="form-group">
     <h1 class="display-5"><strong>Welcome <b>@Model.Username</strong></h1>
     <h1 class="display-5"><strong>Schedule Shift Days</strong></h1>
@@ -105,9 +157,41 @@
     <div class="form-group row mt-5 mb-5">
         <input type="hidden" class="form-control"  asp-for="Username" id="firstName" placeholder="Name">
     </div>
-</form>
+</form> *@
 </div>
 </div>
 </div>
 
 
+@* <div class="widget">
+    <table class="table mytable">
+            <tr>
+                <th>SELECT</th>
+                <th>DAY</th>
+                <th>Date</th>
+                <th>STATUS</th>
+
+            </tr>
+            @foreach (var item in @Model.DayDates)
+            {
+            <tr>
+                <td>
+                    <input class="checkbox" name="CheckedDays" type="checkbox" checked value="@item.Key" />
+                </td>
+                <td>
+                    @item.Key
+                </td> 
+                <td>@item.Value</td>    
+            
+           
+                <td>
+                    <input class="checkbox" name="CheckedDays" type="checkbox" value="@item" />
+                </td>
+                <td>
+                    @item
+                </td>     
+            </tr>
+        }
+        </table>
+
+</div> *@
