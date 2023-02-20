@@ -11,12 +11,21 @@ Shift waiterShift = new Shift("Server=tiny.db.elephantsql.com;Port=5432;Database
 //     "Wednesday",
 // };
 // waiterShift.SelectDay("Amos", n);
+Dictionary<DateOnly, DayOfWeek> daysOfW = new Dictionary<DateOnly, DayOfWeek>(){
+    {DateOnly.Parse("2023/02/20"), DayOfWeek.Monday},
+    {DateOnly.Parse("2023/02/21"), DayOfWeek.Tuesday}
+};
+
+waiterShift.SelectDay("Karabo", daysOfW);
+
+
+
+
 // List<string> m = new List<string>(){
 //     "Monday",
 //     "Wednesday",
 //     "Friday"
 // };
-// waiterShift.SelectDay("Karabo", m);
 // List<string> o = new List<string>(){
 //     "Sunday",
 //     "Wednesday"

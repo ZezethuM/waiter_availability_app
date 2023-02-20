@@ -13,10 +13,11 @@ public class Shift : IWaiterShift
     }
     public Dictionary<string, List<string>> dayWithWiaters = new Dictionary<string, List<string>>();
     public List<int> ids = new List<int>();
-    public void SelectDay(string firstname, List<string> days)
+    public void SelectDay(string firstname, Dictionary<DateOnly, DayOfWeek> days)
     {
         // int waiter_id = 0;
-        int weekdaysid = 0;
+        // int weekdaysid = 0;
+    
         var parameter = new {FirstName = firstname};
         var sql = "SELECT count(*) FROM waiters where firstname = @FirstName;";
 
@@ -27,37 +28,46 @@ public class Shift : IWaiterShift
             throw new Exception($"Invalid username {firstname}");
         }
         var listOfWaiters =  connection.QueryFirst<Waiter>(@"Select * from waiters where firstname = @FirstName;", parameter);
-         var waiter_id = listOfWaiters.Id;
-         Console.WriteLine(waiter_id);
+        var waiter_id = listOfWaiters.Id;
 
-        foreach (var day in days)
+        
+        foreach (var item in days)
         {
-        var parameter2 = new {DayInWeek = day};
-        var sql2 = "SELECT count(*) FROM weekdays where Day = @DayInWeek;";
+            
+            var parameter3 = new {
+                Waiter_Id = waiter_id, 
+                Weekdays = item.Value.ToString(), 
+                Weekdaydates = item.Key.ToDateTime(TimeOnly.Parse("0:00:00"))
+            };
 
-         var result2 = connection.QueryFirst(sql2, parameter2);
+            connection.Execute(@"insert into ShiftSchedule(weekday, weekdaydate, waiter_id) values (@Weekdays, @Weekdaydates, @Waiter_Id)", parameter3); 
+        
+        }
 
-        if(result2.count == 1)
-        {
-        var listOfDays = connection.Query<Weekday>(@"Select * from weekdays where Day = @DayInWeek;", parameter2);
-            foreach (var item in listOfDays)
-            {
-               ids.Add(item.Id);
-            }
-        }
-        foreach (var dayid in ids)
-        {  
-            weekdaysid = dayid;
-        }
-        // var param4 = new {day1 = weekdaysid};
-        // var sqlDays1 = @"select count(*) from schedule where waiters_id = @day1";
-        // var resultingDays1 = connection.QuerySingle(sqlDays1, param4);
-        // if(resultingDays1.count < 3)
+
+        // foreach (var day in days)
         // {
-        var parameter3 = new {Waiter_Id = waiter_id, Weekdaysid = weekdaysid};
-        connection.Execute(@"insert into schedule values (@Waiter_Id, @Weekdaysid)", parameter3); 
+        // var parameter2 = new {DayInWeek = day};
+        // var sql2 = "SELECT count(*) FROM weekdays where Day = @DayInWeek;";
+
+        //  var result2 = connection.QueryFirst(sql2, parameter2);
+
+        // if(result2.count == 1)
+        // {
+        // var listOfDays = connection.Query<Weekday>(@"Select * from weekdays where Day = @DayInWeek;", parameter2);
+        //     foreach (var item in listOfDays)
+        //     {
+        //        ids.Add(item.Id);
+        //     }
         // }
-        }
+
+        // foreach (var dayid in ids)
+        // {  
+        //     weekdaysid = dayid;
+        // }
+        // var parameter3 = new {Waiter_Id = waiter_id, Weekdaysid = weekdaysid};
+        // connection.Execute(@"insert into schedule values (@Waiter_Id, @Weekdaysid)", parameter3); 
+        // }
     }
     public Dictionary<string, List<string>> DisplayDays()
     {

@@ -3,7 +3,9 @@ namespace waiterApp;
 
 public interface IWaiterShift
 {
-    public void SelectDay(string firstname, List<string> days);
+    // public void SelectDay1(string firstname, List<string> days);
+    public void SelectDay(string firstname, Dictionary<DateOnly, DayOfWeek> days);
+    
     public Dictionary<string, List<string>>DisplayDays();
     public List<string> GetListOfDays();
     public Dictionary<string, List<string>> GetDictionary();
