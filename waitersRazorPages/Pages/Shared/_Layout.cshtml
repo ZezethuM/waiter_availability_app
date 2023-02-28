@@ -20,18 +20,28 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-white font-weight-bold text-uppercase" asp-area="/ScheduleShift" asp-page="/ScheduleShift"><strong>Home</strong></a>
+                        @if(Context.Session.GetString("username") != null && Context.Session.GetString("username") != "Admin")
+                        {
+                            <li class="nav-item ">
+                                <a class="nav-link text-white font-weight-bold text-uppercase " asp-area="/ScheduleShift" asp-page="/ScheduleShift"><strong>Home</strong></a>
                             </li> 
-                           
-                            <li class="nav-item">
-                                <a class="nav-link text-white font-weight-bold text-uppercase"  asp-area="" asp-page="/ManagerView"><strong>SCHEDULE</strong></a>
-                            </li>
+                        }
+                           @if(Context.Session.GetString("username") == "Admin")
+                           {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white font-weight-bold text-uppercase " asp-area="" asp-page="/ManagerView"><strong>SCHEDULE</strong></a>
+                                </li>
+                           }
                             <li class="nav-item">
                                 <a class="nav-link text-white font-weight-bold text-uppercase"  asp-area="" asp-page="/UserGuide"><strong>UserGuide</strong></a>
                             </li>
-                    
-                    
+                            @if(Context.Session.GetString("username") != null && Context.Session.GetString("name") != null)
+                            {
+                                  <li class="nav-item">
+                                    <button class="navbtn"><a asp-page="Index" asp-page-handler="Logout"><strong>LOGOUT</strong></a></button>
+                                  </li>
+                            }
+
                         @* <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li> *@
