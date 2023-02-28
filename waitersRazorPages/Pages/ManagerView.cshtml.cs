@@ -30,7 +30,9 @@ namespace waitersRazorPages.Pages
 
         [BindProperty]
         public string UserName {get; set;}
-        public Dictionary<string, List<string>> DaysOfWeek { get { return _shiftDays.DisplayDays();}}
+        public Dictionary<DateOnly, List<string>> DaysOfWeek {get; set;}
+        public Dictionary<DateOnly, DayOfWeek> DayDates = new Dictionary<DateOnly, DayOfWeek>();
+
         public IActionResult OnGetUpdate()
         {
             HttpContext.Session.GetString("name");
@@ -40,16 +42,36 @@ namespace waitersRazorPages.Pages
         public void OnGet()
         {
             UserName = HttpContext.Session.GetString("username");
+            DayDates = _shiftDays.DaysOfTheWeek(datenow, shiftClass.Week);
+            DaysOfWeek = _shiftDays.DisplayDays();
         }
         public void OnPostDelete()
         {
             _shiftDays.ManagerResetData();
             TempData["AlertMessage"] = "Data has been cleared";
         }
-        public void  OnPostUpdate()
+        DateTime datenow = DateTime.Now;
+        public int week = 7;
+        public IActionResult OnPostNext()
+        {
+            HttpContext.Session.GetString("name");
+            DayDates = _shiftDays.DaysOfTheWeek(datenow, shiftClass.Week);
+            DaysOfWeek = _shiftDays.DisplayDays();
+            return Redirect($"ManagerView?Week={week++}");
+        }
+        public IActionResult OnPostPrevious()
+        {
+            HttpContext.Session.GetString("name");
+            DayDates = _shiftDays.DaysOfTheWeek(datenow, shiftClass.Week);
+            DaysOfWeek = _shiftDays.DisplayDays();
+            return Redirect($"ManagerView?Week={0}");
+        }
+        public IActionResult  OnPostUpdate()
         {
             HttpContext.Session.SetString("name", UserName);
-            // return RedirectToPage("ScheduleShift");
+            // DayDates = _shiftDays.DaysOfTheWeek(datenow, shiftClass.Week);
+            // DaysOfWeek = _shiftDays.DisplayDays();
+            return Redirect("ScheduleShift");
         }
         public IActionResult OnPostLogIn()
         {

@@ -7,6 +7,8 @@
 <div class="widget">
    <form method="post">
     <h1 class="display-5 mb"><strong>The Week's Schedule</strong></h1>
+        <button asp-page-handler="Previous">Week-1</button>
+        <button asp-page-handler="Next">Week-2</button>
     <table class="table table-bordered mytable">
         <thead>
             <tr>
@@ -14,29 +16,22 @@
                 <th>WAITERS</th>
             </tr>
         </thead>
-        @foreach (var item in @Model.DaysOfWeek)
+        @foreach (var item in @Model.DayDates)
         {
         <tbody>
               
             <td>
-                @item.Key  
+                @item.Value<br> 
+                @item.Key 
             </td>
             
             <td>
-            @foreach (var days in item.Value)
+            @if(@Model.DaysOfWeek.ContainsKey(item.Key))
             {
-                @if(HttpContext.Session.GetString("username") == "Admin")
+                @foreach (var waiters in @Model.DaysOfWeek[item.Key])
                 {
-                    <li>
-                        <input  type="submit" asp-page="ScheduleShift" class="btn" asp-for="@Model.UserName" value="@days" asp-page-handler="Update">
-                    </li>
+                    <input  type="submit"  class="btn" asp-for="@Model.UserName" value="@waiters" asp-page-handler="Update">
                 }
-                    else
-                    {
-                        <li>
-                        @days
-                    </li>
-                    }
             }
             </td>      
            
