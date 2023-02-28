@@ -35,7 +35,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white font-weight-bold text-uppercase"  asp-area="" asp-page="/UserGuide"><strong>UserGuide</strong></a>
                             </li>
-                            @if(Context.Session.GetString("username") != null && Context.Session.GetString("name") != null)
+                            @if(Context.Session.GetString("username") != null || Context.Session.GetString("name") != null)
                             {
                                   <li class="nav-item">
                                     <button class="navbtn"><a asp-page="Index" asp-page-handler="Logout"><strong>LOGOUT</strong></a></button>
