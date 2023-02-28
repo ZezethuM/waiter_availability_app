@@ -42,15 +42,15 @@ public class UnitTest1
         Assert.Equal(ma.GetDictionary(), ma.DisplayDays());
     }
 
-    [Fact]
-    public void ShouldBeAbleToUpdateWorkingDayOfWaiter()
-    {
+    // [Fact]
+    // public void ShouldBeAbleToUpdateWorkingDayOfWaiter()
+    // {
 
-        List<string> s = new List<string>(){"Tuesday", "Friday","Saturday", "Sunday"};
-        ma.UpdatingShifts("Phumza", s);
+    //     List<string> s = new List<string>(){"Tuesday", "Friday","Saturday", "Sunday"};
+    //     ma.UpdatingShifts("Phumza", s);
 
-        Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Phumza"));
-    }
+    //     Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Phumza"));
+    // }
 
     //  [Fact]
     // public void ShouldBeAbleToReturnAllWaitersInDB()

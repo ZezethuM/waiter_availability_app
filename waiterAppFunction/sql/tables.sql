@@ -32,3 +32,11 @@
     Select firstname from waiters as a
     inner join shiftschedule as b
     on a.id = b.waiter_id;
+
+    Select firstname, weekdaydate from waiters
+    inner join shiftschedule
+    on waiters.id = shiftschedule.waiter_id;
+
+
+    Select waiter_id, weekdaydate from shiftschedule
+    where waiter_id = 2;

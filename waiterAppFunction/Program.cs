@@ -5,15 +5,37 @@ using waiterApp;
 
 Shift waiterShift = new Shift("Server=tiny.db.elephantsql.com;Port=5432;Database=dbwkrzkx;UserId=dbwkrzkx;Password=R8YQefPsLqg0vAXJ7XKRGgg9HKqXjgbm");
 
+//  waiterShift.DisplayDays();
+
+// foreach (var item in waiterShift.DisplayDays())
+// {
+// Console.WriteLine(item.Key);
+// foreach (var item2 in item.Value)
+// {
+//     Console.WriteLine(item2);
+// }
+    
+// }
+// DateTime cur = DateTime.Now;
+
+// foreach (var item in waiterShift.DisplayDays())
+// {
+//     Console.WriteLine(item.Key);    
+// }
+
+
+
+
 // List<string> n = new List<string>(){
 //     "Monday",
 //     "Sunday",
 //     "Wednesday",
 // };
 // waiterShift.SelectDay("Amos", n);
-// Dictionary<DateOnly, DayOfWeek> daysOfW = new Dictionary<DateOnly, DayOfWeek>(){
-//     {DateOnly.Parse("2023/02/20"), DayOfWeek.Monday},
-//     {DateOnly.Parse("2023/02/21"), DayOfWeek.Tuesday}
+
+// List<DateTime> daysOfW = new List<DateTime>(){
+// DateTime.Parse("2023/02/20"),
+// DateTime.Parse("2023/02/21")
 // };
 
 // waiterShift.SelectDay("Karabo", daysOfW);

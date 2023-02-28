@@ -3,252 +3,193 @@ using Npgsql;
 
 namespace waiterApp
 {
-public class Shift : IWaiterShift
-{
-    private NpgsqlConnection connection;
-    public Shift(string connectionString)
+    public class Shift : IWaiterShift
     {
-        connection = new NpgsqlConnection(connectionString);
-        connection.Open();
-    }
-    public Dictionary<string, List<string>> dayWithWiaters = new Dictionary<string, List<string>>();
-    public List<int> ids = new List<int>();
-    public void SelectDay(string firstname, Dictionary<DateOnly, DayOfWeek> days)
-    {
-        // int waiter_id = 0;
-        // int weekdaysid = 0;
-    
-        var parameter = new {FirstName = firstname};
-        var sql = "SELECT count(*) FROM waiters where firstname = @FirstName;";
-
-        var result = connection.QuerySingle<int>(sql, parameter);
-       
-        if(result == 0)
+        private NpgsqlConnection connection;
+        public Shift(string connectionString)
         {
-            throw new Exception($"Invalid username {firstname}");
+            connection = new NpgsqlConnection(connectionString);
+            connection.Open();
         }
-        var listOfWaiters =  connection.QueryFirst<Waiter>(@"Select * from waiters where firstname = @FirstName;", parameter);
-        var waiter_id = listOfWaiters.Id;
+        public Dictionary<string, List<string>> dayWithWiaters = new Dictionary<string, List<string>>();
+        public List<int> ids = new List<int>();
+        public void SelectDay(string firstname, List<DateTime> days)
+        {
+            var parameter = new { FirstName = firstname };
+            var sql = "SELECT count(*) FROM waiters where firstname = @FirstName;";
 
-        
-        foreach (var item in days)
+            var result = connection.QuerySingle<int>(sql, parameter);
+
+            if (result == 0)
+            {
+                throw new Exception($"Invalid username {firstname}");
+            }
+            var listOfWaiters = connection.QueryFirst<Waiter>(@"Select * from waiters where firstname = @FirstName;", parameter);
+            var waiter_id = listOfWaiters.Id;
+
+
+            foreach (var item in days)
+            {
+                var parameter3 = new
+                {
+
+                    Waiter_Id = waiter_id,
+                    Weekdays = item.DayOfWeek.ToString(),
+                    Weekdaydates = item
+                };
+                connection.Execute(@"insert into ShiftSchedule(weekday, weekdaydate, waiter_id) values (@Weekdays, @Weekdaydates, @Waiter_Id)", parameter3);
+            }
+        }
+        public Dictionary<DateOnly, List<string>> DisplayDays()
         {
             
-            var parameter3 = new {
-                Waiter_Id = waiter_id, 
-                Weekdays = item.Value.ToString(), 
-                Weekdaydates = item.Key.ToDateTime(TimeOnly.Parse("0:00:00"))
-            };
+            var sql = @"Select firstname, weekdaydate from waiters
+                    inner join shiftschedule
+                    on waiters.id = shiftschedule.waiter_id;;";
 
-            connection.Execute(@"insert into ShiftSchedule(weekday, weekdaydate, waiter_id) values (@Weekdays, @Weekdaydates, @Waiter_Id)", parameter3); 
-        
+            var waiterDays = connection.Query<Shift_Schedule>(sql);
+
+            Dictionary<DateOnly, List<string>> daysAndWaitersShift = new Dictionary<DateOnly, List<string>>();
+
+            var newList = waiterDays.ToList().GroupBy(x => x.WeekdayDate);
+
+            foreach (var item in newList)
+            {
+                // foreach (var item2 in DaysOfTheWeek(currDate))
+                // {
+                //     if(!daysAndWaitersShift.ContainsKey(item2.Key))
+                //     {
+                        daysAndWaitersShift.Add(DateOnly.FromDateTime(item.Key), new List<string>());    
+                    // }
+                // }
+                foreach (var item1 in item)
+                {
+                   
+                    daysAndWaitersShift[DateOnly.FromDateTime(item1.WeekdayDate)].Add(item1.FirstName!);
+
+                }
+            }
+
+            return daysAndWaitersShift;
         }
-
-
-        // foreach (var day in days)
+        // public Dictionary<DateOnly, List<string>> GetDictionary()
         // {
-        // var parameter2 = new {DayInWeek = day};
-        // var sql2 = "SELECT count(*) FROM weekdays where Day = @DayInWeek;";
-
-        //  var result2 = connection.QueryFirst(sql2, parameter2);
-
-        // if(result2.count == 1)
-        // {
-        // var listOfDays = connection.Query<Weekday>(@"Select * from weekdays where Day = @DayInWeek;", parameter2);
-        //     foreach (var item in listOfDays)
-        //     {
-        //        ids.Add(item.Id);
-        //     }
+        //     return DisplayDays();
         // }
 
-        // foreach (var dayid in ids)
-        // {  
-        //     weekdaysid = dayid;
-        // }
-        // var parameter3 = new {Waiter_Id = waiter_id, Weekdaysid = weekdaysid};
-        // connection.Execute(@"insert into schedule values (@Waiter_Id, @Weekdaysid)", parameter3); 
-        // }
-    }
-    public Dictionary<string, List<string>> DisplayDays()
-    {
-        var sql = @"select weekdays.day, waiters.firstname
-        from weekdays
-        inner join schedule on  schedule.day_id = weekdays.id
-        inner join waiters on schedule.waiters_id = waiters.id";
-
-        var waiterDays = connection.Query<Shift_Schedule>(sql);
-
-        List<string> monday = new List<string>();
-        List<string> tuesday = new List<string>();
-        List<string> wednesday = new List<string>();
-        List<string> thursday = new List<string>();
-        List<string> friday = new List<string>();
-        List<string> saturday = new List<string>();
-        List<string> sunday = new List<string>();
-
-        Dictionary<string, List<string>> daysAndWaitersShift = new Dictionary<string, List<string>>()
+        public List<string> shiftDays = new List<string>();
+        public List<string> ShifDayOfWaiter(string firstname)
         {
-            {"Monday", monday},
-            {"Tuesday", tuesday},
-            {"Wednesday", wednesday},
-            {"Thursday", thursday},
-            {"Friday", friday},
-            {"Saturday", saturday},
-            {"Sunday", sunday}
-        };
-
-        foreach (var item in waiterDays)
-        {
-            if(item.Day == "Monday")
-            {
-                monday.Add(item.FirstName!);
-                daysAndWaitersShift[item.Day] = monday;
-            }
-            else if(item.Day == "Tuesday")
-            {
-                tuesday.Add(item.FirstName!);
-                daysAndWaitersShift[item.Day] = tuesday;
-            }
-            else if(item.Day == "Wednesday")
-            {
-                wednesday.Add(item.FirstName!);
-                daysAndWaitersShift[item.Day] = wednesday;
-            }
-            else if(item.Day == "Thursday")
-            {
-                thursday.Add(item.FirstName!);
-                daysAndWaitersShift[item.Day] = thursday;
-            }
-            else if(item.Day == "Friday")
-            {
-                friday.Add(item.FirstName!);
-                daysAndWaitersShift[item.Day] = friday;
-            }
-            else if(item.Day == "Saturday")
-            {
-                saturday.Add(item.FirstName!);
-                daysAndWaitersShift[item.Day] = saturday;
-            }
-            else if(item.Day == "Sunday")
-            {
-                sunday.Add(item.FirstName!);
-                daysAndWaitersShift[item.Day] = sunday;
-            }
-        }
-
-        return daysAndWaitersShift;
-    }
-    public Dictionary<string, List<string>> GetDictionary()
-    {
-        return DisplayDays();
-    }
-
-    public List<string> shiftDays = new List<string>();
-    public List<string> ShifDayOfWaiter(string firstname)
-    {
-        shiftDays.Clear();
-        var sql3 = @"select firstname, day from waiters
+            shiftDays.Clear();
+            var sql3 = @"select firstname, day from waiters
         inner join schedule on waiters.id = schedule.waiters_id
         inner join weekdays on schedule.day_id = weekdays.id";
 
-        var dayWithWaiters = connection.Query<Shift_Schedule>(sql3);
+            var dayWithWaiters = connection.Query<Shift_Schedule>(sql3);
 
-        foreach (var day in dayWithWaiters)
-        {
-            if(day.FirstName == firstname)
+            foreach (var day in dayWithWaiters)
             {
-                shiftDays.Add(day.Day!);
+                if (day.FirstName == firstname)
+                {
+                    shiftDays.Add(day.Day!);
+                }
+            }
+            return shiftDays;
+        }
+        public List<string> GetListOfDays()
+        {
+            return shiftDays;
+        }
+
+        public void UpdatingShifts(string name, List<DateTime> newDays)
+        {
+            int waiter_id2 = 0;
+
+
+            var parameter4 = new { NewName = name };
+            var sql4 = "SELECT count(*) FROM waiters where firstname = @NewName;";
+
+            var result4 = connection.QueryFirst(sql4, parameter4);
+
+            if (result4.count == 1)
+            {
+                var listOfWaiters = connection.Query<Waiter>(@"Select * from waiters where firstname = @NewName;", parameter4);
+                foreach (var item in listOfWaiters)
+                {
+                    waiter_id2 = item.Id;
+                }
+            }
+
+            var param = new { WaiterId = waiter_id2 };
+            var sqlqry = @"SELECT count(*) FROM Shiftschedule where waiter_id = @WaiterId;";
+
+            var result2 = connection.QueryFirst(sqlqry, param);
+
+            if (result2.count > 1)
+            {
+                connection.Execute(@"DELETE FROM Shiftschedule where waiter_id = @WaiterId", param);
+                foreach (var newday in newDays)
+                {
+                    var parameter6 = new
+                    {
+                        weekday1 = newday.DayOfWeek.ToString(),
+                        Weekday_date1 = newday,
+                        Waiter_Id2 = waiter_id2
+                    };
+                    connection.Execute(@"insert into shiftschedule(weekday, weekdaydate, waiter_id) values (@weekday1, @Weekday_date1, @Waiter_Id2)", parameter6);
+                }
+            }
+            else
+            {
+                foreach (var newday in newDays)
+                {
+                    var param2 = new
+                    {
+                        Weekday2 = newday.DayOfWeek.ToString(),
+                        weekday_date2 = newday,
+                        Waiter_Id1 = waiter_id2
+                    };
+                    connection.Execute(@"insert into shiftschedule(weekday, weekdaydate, waiter_id) values (@Weekday2, @weekday_date2, @Waiter_Id1)", param2);
+                }
             }
         }
-        return shiftDays;
-    }
-    public List<string> GetListOfDays()
-    {
-        return shiftDays;
-    }
-
-    public void UpdatingShifts(string name, List<string> newDays)
-    {
-        int waiter_id2 = 0;
-        int weekdaysid1 = 0;
-
-        List<int> DayIds = new List<int>(); 
-
-        var parameter4 = new {NewName = name};
-        var sql4 = "SELECT count(*) FROM waiters where firstname = @NewName;";
-
-        var result4 = connection.QueryFirst(sql4, parameter4);
-
-        if(result4.count == 1)
+        public string CheckEmployees(string firstname)
         {
-        var listOfWaiters =  connection.Query<Waiter>(@"Select * from waiters where firstname = @NewName;", parameter4);
-        foreach (var item in listOfWaiters)
-        {
-            waiter_id2 = item.Id;
-        }
-        }
+            var param3 = new { Name = firstname };
+            var sqlquery = "SELECT count(*) FROM waiters where firstname = @Name";
 
-        foreach (var newday in newDays)
-        {
-        var param = new {Week_day = newday};
-        var sqlqry = @"SELECT count(*) FROM weekdays where Day = @Week_day;";
+            var results = connection.QueryFirst(sqlquery, param3);
 
-        var result2 = connection.QueryFirst(sqlqry, param);
-
-        if(result2.count == 1)
-        {
-            var listOfDays1 = connection.Query<Weekday>(@"Select * from weekdays where Day = @Week_day;", param);
-            foreach (var item in listOfDays1)
+            if (results.count == 1)
             {
-            DayIds.Add(item.Id);
+                return firstname;
             }
-        }
-        }
-        var parameter5 = new {Waiter_Id2 = waiter_id2};
-        var sqlqry1 = @"select count(*) from schedule where waiters_id = @Waiter_Id2";
-        var result5 = connection.QueryFirst(sqlqry1, parameter5);
-
-        if(result5.count > 1)
-        {
-            connection.Execute(@"DELETE FROM Schedule where waiters_id = @Waiter_Id2", parameter5);
-            foreach (var shifday1 in DayIds)
+            else
             {
-                weekdaysid1 = shifday1;
-                var parameter6 = new {Waiter_Id2 = waiter_id2, Weekdaysid3 = weekdaysid1};
-                connection.Execute(@"insert into schedule values (@Waiter_Id2, @Weekdaysid3)", parameter6); 
+                return "Invalid user please enter a correct firstname";
             }
-    
+
         }
-        else{
-            foreach (var shifday in DayIds)
+        public void ManagerResetData()
+        {
+            connection.Execute(@"truncate table shiftschedule");
+        }
+
+        DateTime currDate = DateTime.Now;
+        public Dictionary<DateOnly, DayOfWeek> DaysOfTheWeek(DateTime currDateAndTime, int week)
+        {
+            Dictionary<DateOnly, DayOfWeek> dates = new Dictionary<DateOnly, DayOfWeek>();
+
+            currDateAndTime = currDate;
+            var mon = DayOfWeek.Monday - currDateAndTime.DayOfWeek + week;
+
+            var day = currDate.AddDays(mon);
+            for (var i = 0; i < 7; i++)
             {
-                weekdaysid1 = shifday;
-                var param2 = new {Waiter_Id1 = waiter_id2, Weekdaysid1 = weekdaysid1};
-                connection.Execute(@"insert into schedule values (@Waiter_Id1, @Weekdaysid1)", param2);
+                dates.Add(DateOnly.FromDateTime(day.AddDays(i)), day.AddDays(i).DayOfWeek);
             }
+            return dates;
         }
     }
-    public string CheckEmployees(string firstname)
-    {
-        var param3 = new {Name = firstname};
-        var sqlquery = "SELECT count(*) FROM waiters where firstname = @Name;";
-
-        var results = connection.QueryFirst(sqlquery, param3);
-
-        if(results.count == 1)
-        {
-            return firstname;
-        }
-        else
-        {
-            return "Invalid user please enter a correct firstname";
-        }
-
-    }
-    public void ManagerResetData()
-    {
-        connection.Execute(@"truncate table schedule");
-    }
-}
 }
 
