@@ -1,1 +1,1 @@
-delete from schedule;
+delete from shiftschedule;

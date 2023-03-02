@@ -54,14 +54,6 @@ public class UnitTest1
      [Fact]
     public void ShouldBeAbleToReturnAllWorkingDaysOfWaiter()
     {
-        List<DateTime> s = new List<DateTime>()
-        {
-            DateTime.Parse("2023/02/27"),
-            DateTime.Parse("2023/02/28")
-        };
-        ma.UpdatingShifts("Karabo", s, 0);
-        ma.UpdatingShifts("Karabo", s, 7);
-
         Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Phumza"));
     }
 
