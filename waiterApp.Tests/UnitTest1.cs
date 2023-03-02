@@ -1,4 +1,3 @@
-using waiterApp;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -7,25 +6,22 @@ using Npgsql;
 using Dapper;
 
 namespace waiterApp.Tests;
- 
 public class UnitTest1
 {
    static string connectionString = "Server=tiny.db.elephantsql.com;Port=5432;Database=dvskbyna;UserId=dvskbyna;Password=ADBsJezup7e_jmpWR07rzHYUCp5qAwFV";
-
-       static string GetConnectionString() {
-        // read the connection string from an environment variable...
-        // this make is possible for this test to run on Git Hub Actions
-        var theCN = Environment.GetEnvironmentVariable("PSQLConnectionString");
-        if (theCN == "" || theCN == null) {
-            theCN = connectionString;
+       static string GetConnectionString() 
+       {
+            var theCN = Environment.GetEnvironmentVariable("PSQLConnectionString");
+            if (theCN == "" || theCN == null) 
+            {
+                theCN = connectionString;
+            }
+            return theCN;
         }
-        return theCN;
-    }
    IWaiterShift ma = new Shift(GetConnectionString());
     public UnitTest1()
     {
         var sql = File.ReadAllText("./sql/data.sql");
-
         using(var connection = new NpgsqlConnection(GetConnectionString()))
         {
             connection.Execute(sql);
@@ -41,25 +37,32 @@ public class UnitTest1
     {
         Assert.Equal(ma.GetDictionary(), ma.DisplayDays());
     }
-
-    [Fact]
+   [Fact]
     public void ShouldBeAbleToUpdateWorkingDayOfWaiter()
     {
+        List<DateTime> s = new List<DateTime>()
+        {
+            DateTime.Parse("2023/03/01"),
+            DateTime.Parse("2023/02/21")
+        };
+        ma.UpdatingShifts("Phumza", s, 0);
+        ma.UpdatingShifts("Phumza", s, 7);
 
-        List<string> s = new List<string>(){"Tuesday", "Friday","Saturday", "Sunday"};
-        ma.UpdatingShifts("Phumza", s);
+        Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Phumza"));
+    } 
+
+     [Fact]
+    public void ShouldBeAbleToReturnAllWorkingDaysOfWaiter()
+    {
+        List<DateTime> s = new List<DateTime>()
+        {
+            DateTime.Parse("2023/02/27"),
+            DateTime.Parse("2023/02/28")
+        };
+        ma.UpdatingShifts("Karabo", s, 0);
+        ma.UpdatingShifts("Karabo", s, 7);
 
         Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Phumza"));
     }
-
-    //  [Fact]
-    // public void ShouldBeAbleToReturnAllWaitersInDB()
-    // {
-
-    //     List<string> s = new List<string>(){"Tuesday", "Friday","Saturday", "Sunday"};
-    //     ma.UpdatingShifts("Phumza", s);
-
-    //     Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Phumza"));
-    // }
 
 }

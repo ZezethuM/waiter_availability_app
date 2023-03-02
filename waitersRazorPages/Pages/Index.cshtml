@@ -3,30 +3,29 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
 <div class="text-center">
-<form method="post" asp-page="Index" class="myform">
-<div class="form-group row mt-5">
-<div class="col-sm-13">
-    <h3>Hello!!, Please enter your name and login below.</h3>
-    <input type="text" asp-for="@Model.UserName" class="question inp" id="nme" required autocomplete="off" />
-    <label for="nme"><span>What's your name?</span></label>
-</div>
-</div>
-      @if(TempData["UserMessage"] != null)
-    {
-        <div class="alert alert-success">
-            <b>@TempData["UserMessage"]</b>
+    <form method="post" asp-page="Index" class="myform">
+        <div class="form-group row mt-5">
+            <div class="col-sm-13">
+                <h3>Hello!!, Please enter your name and login below.</h3>
+                <input type="text" asp-for="@Model.UserName" class="question inp" id="nme" required autocomplete="off" />
+                <label for="nme"><span>What's your name?</span></label>
+            </div>
         </div>
-    }
-     @if(TempData["LoginMessage"] != null)
-    {
-        <div class="alert alert-success">
-            <b>@TempData["LoginMessage"]</b>
-        </div>
-    }
-    <button class=" button-73" type="submit" value="Login">LOGIN</button>
-</form>
+        @if(TempData["UserMessage"] != null)
+        {
+            <div class="alert alert-success">
+                <b>@TempData["UserMessage"]</b>
+            </div>
+        }
+        @if(TempData["LoginMessage"] != null)
+        {
+            <div class="alert alert-success">
+                <b>@TempData["LoginMessage"]</b>
+            </div>
+        }
+        <button class=" button-73" type="submit" value="Login">LOGIN</button>
+    </form>
 </div>
 
 <!-- HTML !-->
