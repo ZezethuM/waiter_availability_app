@@ -11,7 +11,5 @@ public interface IWaiterShift
     public List<DateOnly> ShifDayOfWaiter(string firstname);
     public void UpdatingShifts(string name, List<DateTime> newDays, int week);
     public string CheckEmployees(string firstname);
-     public Dictionary<DayOfWeek, DateOnly> DaysOfTheWeek(DateTime currDateAndTime);
-
     public void ManagerResetData();
 }

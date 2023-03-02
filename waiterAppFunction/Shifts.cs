@@ -202,44 +202,5 @@ namespace waiterApp
             return dates;
         }
     }
-<<<<<<< HEAD
-    public string CheckEmployees(string firstname)
-    {
-        var param3 = new {Name = firstname};
-        var sqlquery = "SELECT count(*) FROM waiters where firstname = @Name;";
-
-        var results = connection.QueryFirst(sqlquery, param3);
-
-        if(results.count == 1)
-        {
-            return firstname;
-        }
-        else
-        {
-            return "Invalid user please enter a correct firstname";
-        }
-
-    }
-
-    public void ManagerResetData()
-    {
-        connection.Execute(@"truncate table schedule");
-    }
-    DateTime currDate = DateTime.Now;
-     public Dictionary<DayOfWeek, DateOnly> DaysOfTheWeek(DateTime currDateAndTime)
-    {
-        Dictionary<DayOfWeek,DateOnly> dates = new Dictionary<DayOfWeek,DateOnly>();
-        currDateAndTime = currDate;
-        var mon = DayOfWeek.Monday - currDateAndTime.DayOfWeek;
-        var day = currDate.AddDays(mon);
-        for(var i = 0; i < 7; i++)
-        {
-            dates.Add(day.AddDays(i).DayOfWeek, DateOnly.FromDateTime(day.AddDays(i))); 
-        }
-        return dates;
-    }
-}
-=======
->>>>>>> temporal
 }
 
