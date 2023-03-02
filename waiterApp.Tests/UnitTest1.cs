@@ -28,7 +28,7 @@ public class UnitTest1
         }
     }
     [Fact]
-    public void AddWaiterWorkingDaysOnTheDB()
+    public void ShouldReturnWaiterWorkingDaysOnTheDB()
     {
         Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Phumza"));    
     }
@@ -42,11 +42,16 @@ public class UnitTest1
     {
         List<DateTime> s = new List<DateTime>()
         {
-            DateTime.Parse("2023/03/01"),
-            DateTime.Parse("2023/02/21")
+            DateTime.Parse("2023/02/27"),
+            DateTime.Parse("2023/03/01")
+        };
+        List<DateTime> x = new List<DateTime>()
+        {
+            DateTime.Parse("2023/03/06"),
+            DateTime.Parse("2023/03/07")
         };
         ma.UpdatingShifts("Phumza", s, 0);
-        ma.UpdatingShifts("Phumza", s, 7);
+        ma.UpdatingShifts("Phumza", x, 7);
 
         Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Phumza"));
     } 
@@ -59,8 +64,13 @@ public class UnitTest1
             DateTime.Parse("2023/02/27"),
             DateTime.Parse("2023/02/28")
         };
+         List<DateTime> x = new List<DateTime>()
+        {
+            DateTime.Parse("2023/03/06"),
+            DateTime.Parse("2023/03/07")
+        };
         ma.UpdatingShifts("Karabo", s, 0);
-        ma.UpdatingShifts("Karabo", s, 7);
+        ma.UpdatingShifts("Karabo", x, 7);
 
         Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Karabo"));
     }
