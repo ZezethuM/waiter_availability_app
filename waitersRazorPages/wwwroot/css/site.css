@@ -50,7 +50,7 @@ body {
   align-items: center; 
   justify-content: center; 
   background-color: #ffffff;
-  height: 100vh; 
+  height: 120vh; 
   width: 700px; 
   margin-bottom: 100px;
   margin-left: auto;
@@ -60,7 +60,7 @@ body {
 {
   text-align: center;
   align-items: center;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 .widget table
 {
@@ -73,6 +73,7 @@ body {
 {
   width: 20px;
   height: 20px;
+  margin: auto;
 }
 .mytable {
   color: #ffffff;
@@ -80,6 +81,7 @@ body {
   width: 100% !important; 
   font-size: 17px;
   font-weight:lighter;
+  text-align: center;
 }
 a
 {
@@ -151,6 +153,7 @@ label
 h6
 {
   font-family: 'Merienda', cursive;
+  color: #e50191;
  }
 .mytable li
 {
@@ -171,11 +174,34 @@ h1{
   height: 50px;
   font-weight: bolder;
 }
+.para
+{
+  color: #e50191;
+  font-size: 40px;
+  margin: 0;
+}
 #navi
 {
   background-color: #e50191;
 }
-
+.btns
+{
+  border-radius: 10px;
+  height: 40px;
+  background-color: #e50191;
+  color: #ffffff;
+  border: none;
+  margin: 15px 0 15px 0;
+}
+.btnse
+{
+  border-radius: 10px;
+  height: 40px;
+  background-color: #e50191;
+  color: #ffffff;
+  border: none;
+  margin-bottom: 10px;
+}
 #good {
   color: green;
   font-weight: bold;
@@ -187,10 +213,22 @@ h1{
 
 #empty 
 {
-  color: crimson;
+  color: red;
   font-weight: bold;
 }
-
+.navbtn
+{
+  margin-left: 900px;
+  height: 40px;
+  border: none;
+  background-color: #e50191;
+  color: #ffffff;
+  
+}
+.navbtn a:hover 
+{
+  color: #ffffff;
+}
 /* CSS */
 .button-73 {
   appearance: none;

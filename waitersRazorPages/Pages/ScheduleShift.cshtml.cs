@@ -18,12 +18,11 @@ namespace waitersRazorPages.Pages
     [BindProperty]
     public List<DateTime> CheckedDays {get; set;}
 
-    public List<string> userdays = new List<string>();
+    public List<DateOnly> userdays = new List<DateOnly>();
 
     DateTime n = DateTime.Now;
     public Dictionary<DateOnly, DayOfWeek> DayDates = new Dictionary<DateOnly, DayOfWeek>();
 
-    // public Dictionary<DateOnly, List<string>> DaysOfWeek { get {return _waiterShits.DisplayDays();} }
      public Dictionary<DateOnly, List<string>> DaysOfWeek { get; set; }
 
     [BindProperty (SupportsGet =true)]
@@ -53,12 +52,12 @@ namespace waitersRazorPages.Pages
             DaysOfWeek= _waiterShits.DisplayDays();
         }
     }
-    public int week = 7;
+    
     public IActionResult OnPostNext()
     {
         DayDates = _waiterShits.DaysOfTheWeek(n, shifts.Week);
         DaysOfWeek = _waiterShits.DisplayDays();
-        return Redirect($"ScheduleShift?Week={week++}");
+        return Redirect($"ScheduleShift?Week={7}");
     }
     public IActionResult OnPostPrevious()
     {
@@ -68,20 +67,53 @@ namespace waitersRazorPages.Pages
     }
     public IActionResult OnPostReset()
     {
-        if(Username != null)
+        Username = HttpContext.Session.GetString("username")!;    
+        if(Username != "Admin")
         {
-        _waiterShits.UpdatingShifts(Username, CheckedDays);
-        userdays = _waiterShits.ShifDayOfWaiter(Username);
-        DayDates = _waiterShits.DaysOfTheWeek(n, shifts.Week);
-        DaysOfWeek= _waiterShits.DisplayDays();
-        TempData["Message"] = "Days have been successfully updated/Added";
-        return Page();
+            if(Username != null && shifts.Week == 0)
+            {
+                _waiterShits.UpdatingShifts(Username, CheckedDays, 0);
+                userdays = _waiterShits.ShifDayOfWaiter(Username);
+                DayDates = _waiterShits.DaysOfTheWeek(n, 0);
+                DaysOfWeek= _waiterShits.DisplayDays();
+                TempData["Message"] = "Days have been successfully updated/Added";
+                return Page();
+            }
+            else if(Username != null && shifts.Week == 7)
+            {
+                _waiterShits.UpdatingShifts(Username, CheckedDays, 7);
+                userdays = _waiterShits.ShifDayOfWaiter(Username);
+                DayDates = _waiterShits.DaysOfTheWeek(n, 7);
+                DaysOfWeek= _waiterShits.DisplayDays();
+                TempData["Message"] = "Days have been successfully updated/Added";
+                return Page();
+            }
         }
-        else
+        else if(Username == "Admin")
         {
-            TempData["LoginMessage"] = "Please Login first";
-           return RedirectToPage("Index");
+            Username = HttpContext.Session.GetString("name")!;
+            if(Username != null && shifts.Week == 0)
+            {
+                _waiterShits.UpdatingShifts(Username, CheckedDays, 0);
+                userdays = _waiterShits.ShifDayOfWaiter(Username);
+                DayDates = _waiterShits.DaysOfTheWeek(n, 0);
+                DaysOfWeek= _waiterShits.DisplayDays();
+                TempData["Message"] = "Days have been successfully updated/Added";
+                return Page();
+            }
+            else if(Username != null && shifts.Week == 7)
+            {
+                _waiterShits.UpdatingShifts(Username, CheckedDays, 7);
+                userdays = _waiterShits.ShifDayOfWaiter(Username);
+                DayDates = _waiterShits.DaysOfTheWeek(n, 7);
+                DaysOfWeek= _waiterShits.DisplayDays();
+                TempData["Message"] = "Days have been successfully updated/Added";
+                return Page();
+            }
         }
+        TempData["LoginMessage"] = "Please Login first";
+        return RedirectToPage("Index");
+        
     }
     public IActionResult OnPostLogIn()
     {

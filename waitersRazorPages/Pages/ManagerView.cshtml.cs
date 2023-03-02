@@ -69,8 +69,6 @@ namespace waitersRazorPages.Pages
         public IActionResult  OnPostUpdate()
         {
             HttpContext.Session.SetString("name", UserName);
-            // DayDates = _shiftDays.DaysOfTheWeek(datenow, shiftClass.Week);
-            // DaysOfWeek = _shiftDays.DisplayDays();
             return Redirect("ScheduleShift");
         }
         public IActionResult OnPostLogIn()

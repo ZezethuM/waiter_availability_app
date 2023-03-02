@@ -45,7 +45,7 @@ namespace waiterApp
             
             var sql = @"Select firstname, weekdaydate from waiters
                     inner join shiftschedule
-                    on waiters.id = shiftschedule.waiter_id;;";
+                    on waiters.id = shiftschedule.waiter_id;";
 
             var waiterDays = connection.Query<Shift_Schedule>(sql);
 
@@ -55,35 +55,28 @@ namespace waiterApp
 
             foreach (var item in newList)
             {
-                // foreach (var item2 in DaysOfTheWeek(currDate))
-                // {
-                //     if(!daysAndWaitersShift.ContainsKey(item2.Key))
-                //     {
-                        daysAndWaitersShift.Add(DateOnly.FromDateTime(item.Key), new List<string>());    
-                    // }
-                // }
+                daysAndWaitersShift.Add(DateOnly.FromDateTime(item.Key), new List<string>());    
+               
                 foreach (var item1 in item)
                 {
-                   
                     daysAndWaitersShift[DateOnly.FromDateTime(item1.WeekdayDate)].Add(item1.FirstName!);
-
                 }
             }
 
             return daysAndWaitersShift;
         }
-        // public Dictionary<DateOnly, List<string>> GetDictionary()
-        // {
-        //     return DisplayDays();
-        // }
+        public Dictionary<DateOnly, List<string>> GetDictionary()
+        {
+            return DisplayDays();
+        }
 
-        public List<string> shiftDays = new List<string>();
-        public List<string> ShifDayOfWaiter(string firstname)
+        public List<DateOnly> shiftDays = new List<DateOnly>();
+        public List<DateOnly> ShifDayOfWaiter(string firstname)
         {
             shiftDays.Clear();
-            var sql3 = @"select firstname, day from waiters
-        inner join schedule on waiters.id = schedule.waiters_id
-        inner join weekdays on schedule.day_id = weekdays.id";
+            var sql3 = @"Select firstname, weekdaydate from waiters
+                    inner join shiftschedule
+                    on waiters.id = shiftschedule.waiter_id;";
 
             var dayWithWaiters = connection.Query<Shift_Schedule>(sql3);
 
@@ -91,17 +84,17 @@ namespace waiterApp
             {
                 if (day.FirstName == firstname)
                 {
-                    shiftDays.Add(day.Day!);
+                    shiftDays.Add(DateOnly.FromDateTime(day.WeekdayDate));
                 }
             }
             return shiftDays;
         }
-        public List<string> GetListOfDays()
+        public List<DateOnly> GetListOfDays()
         {
             return shiftDays;
         }
 
-        public void UpdatingShifts(string name, List<DateTime> newDays)
+        public void UpdatingShifts(string name, List<DateTime> newDays, int week)
         {
             int waiter_id2 = 0;
 
@@ -119,15 +112,33 @@ namespace waiterApp
                     waiter_id2 = item.Id;
                 }
             }
-
-            var param = new { WaiterId = waiter_id2 };
-            var sqlqry = @"SELECT count(*) FROM Shiftschedule where waiter_id = @WaiterId;";
+                        var param = new { WaiterId = waiter_id2 };
+                        var sqlqry = @"SELECT count(*) FROM Shiftschedule where waiter_id = @WaiterId;";
 
             var result2 = connection.QueryFirst(sqlqry, param);
 
             if (result2.count > 1)
             {
-                connection.Execute(@"DELETE FROM Shiftschedule where waiter_id = @WaiterId", param);
+                if(week == 0)
+                {
+                    foreach (var items in DaysOfTheWeek(currDate, 0))
+                    {
+                        DateTime datet = items.Key.ToDateTime(TimeOnly. MinValue);
+                        var parame = new {WaiterId2 = waiter_id2, WeekDate = datet};
+                        connection.Execute(@"DELETE FROM Shiftschedule where shiftschedule.waiter_id = @WaiterId2 AND weekdaydate = @WeekDate", parame);
+                        
+                    }
+                }
+                else if(week == 7)
+                {
+                    foreach (var item in DaysOfTheWeek(currDate, 7))
+                    {
+                        DateTime datets = item.Key.ToDateTime(TimeOnly. MinValue);
+                        var parames = new {WaiterId3 = waiter_id2, WeekDate1 = datets};
+                        connection.Execute(@"DELETE FROM Shiftschedule where waiter_id = @WaiterId3 AND weekdaydate = @WeekDate1", parames);
+                        
+                    }
+                }
                 foreach (var newday in newDays)
                 {
                     var parameter6 = new

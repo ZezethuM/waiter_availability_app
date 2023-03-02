@@ -3,19 +3,15 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using waiterApp;
 
 namespace waitersRazorPages.Pages;
-
 public class IndexModel : PageModel
 {
     private IWaiterShift _waiterShift;
-
      private readonly ILogger<IndexModel> _logger;
-
     public IndexModel(ILogger<IndexModel> logger, IWaiterShift waiterShift)
     {
         _logger = logger;
         _waiterShift = waiterShift;
     }
-    
     public string Firstname;
 
     [BindProperty]
@@ -49,12 +45,11 @@ public class IndexModel : PageModel
         }
         else
         {
-        TempData["UserMessage"] = _waiterShift.CheckEmployees(Firstname);
-        Msg = _waiterShift.CheckEmployees(Firstname);
-        UserName = "";
-        ModelState.Clear();
-        return Page();
+            TempData["UserMessage"] = _waiterShift.CheckEmployees(Firstname);
+            Msg = _waiterShift.CheckEmployees(Firstname);
+            UserName = "";
+            ModelState.Clear();
+            return Page();
         }
     }
-
 }

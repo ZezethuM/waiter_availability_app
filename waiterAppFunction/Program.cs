@@ -6,12 +6,13 @@ using waiterApp;
 Shift waiterShift = new Shift("Server=tiny.db.elephantsql.com;Port=5432;Database=dbwkrzkx;UserId=dbwkrzkx;Password=R8YQefPsLqg0vAXJ7XKRGgg9HKqXjgbm");
 
 //  waiterShift.DisplayDays();
-
 // foreach (var item in waiterShift.DisplayDays())
 // {
 // Console.WriteLine(item.Key);
-// foreach (var item2 in item.Value)
+// waiterShift.ShifDayOfWaiter("Karabo");
+// foreach (var item2 in waiterShift.GetListOfDays())
 // {
+//     // Console.WriteLine(waiterShift.ShifDayOfWaiter("phumza"));
 //     Console.WriteLine(item2);
 // }
     
