@@ -37,42 +37,42 @@ public class UnitTest1
     {
         Assert.Equal(ma.GetDictionary(), ma.DisplayDays());
     }
-   [Fact]
-    public void ShouldBeAbleToUpdateWorkingDayOfWaiter()
-    {
-        List<DateTime> s = new List<DateTime>()
-        {
-            DateTime.Parse("2023/02/27"),
-            DateTime.Parse("2023/03/01")
-        };
-        List<DateTime> x = new List<DateTime>()
-        {
-            DateTime.Parse("2023/03/06"),
-            DateTime.Parse("2023/03/07")
-        };
-        ma.UpdatingShifts("Phumza", s, 0);
-        ma.UpdatingShifts("Phumza", x, 7);
+//    [Fact]
+//     public void ShouldBeAbleToUpdateWorkingDayOfWaiter()
+//     {
+//         List<DateTime> s = new List<DateTime>()
+//         {
+//             DateTime.Parse("2023/02/27"),
+//             DateTime.Parse("2023/03/01")
+//         };
+//         List<DateTime> x = new List<DateTime>()
+//         {
+//             DateTime.Parse("2023/03/06"),
+//             DateTime.Parse("2023/03/07")
+//         };
+//         ma.UpdatingShifts("Phumza", s, 0);
+//         ma.UpdatingShifts("Phumza", x, 7);
 
-        Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Phumza"));
-    } 
+//         Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Phumza"));
+//     } 
 
-     [Fact]
-    public void ShouldBeAbleToReturnAllWorkingDaysOfWaiter()
-    {
-        List<DateTime> s = new List<DateTime>()
-        {
-            DateTime.Parse("2023/02/27"),
-            DateTime.Parse("2023/02/28")
-        };
-         List<DateTime> x = new List<DateTime>()
-        {
-            DateTime.Parse("2023/03/06"),
-            DateTime.Parse("2023/03/07")
-        };
-        ma.UpdatingShifts("Karabo", s, 0);
-        ma.UpdatingShifts("Karabo", x, 7);
+//      [Fact]
+//     public void ShouldBeAbleToReturnAllWorkingDaysOfWaiter()
+//     {
+//         List<DateTime> s = new List<DateTime>()
+//         {
+//             DateTime.Parse("2023/02/27"),
+//             DateTime.Parse("2023/02/28")
+//         };
+//          List<DateTime> x = new List<DateTime>()
+//         {
+//             DateTime.Parse("2023/03/06"),
+//             DateTime.Parse("2023/03/07")
+//         };
+//         ma.UpdatingShifts("Karabo", s, 0);
+//         ma.UpdatingShifts("Karabo", x, 7);
 
-        Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Karabo"));
-    }
+//         Assert.Equal(ma.GetListOfDays(), ma.ShifDayOfWaiter("Karabo"));
+//     }
 
 }

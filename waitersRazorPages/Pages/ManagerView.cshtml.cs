@@ -47,7 +47,10 @@ namespace waitersRazorPages.Pages
         }
         public void OnPostDelete()
         {
+            UserName = HttpContext.Session.GetString("username");
             _shiftDays.ManagerResetData();
+            DayDates = _shiftDays.DaysOfTheWeek(datenow, shiftClass.Week);
+            DaysOfWeek = _shiftDays.DisplayDays();
             TempData["AlertMessage"] = "Data has been cleared";
         }
         DateTime datenow = DateTime.Now;
